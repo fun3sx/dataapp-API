@@ -12,8 +12,9 @@ from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
 
-from flask import Flask
+from flask import Flask, request, abort
 from flask_restful import Api
+from flask_cors import CORS
 
 from dataapi1.database import db
 from dataapi1.resources.hpi_resource import HPI
@@ -30,6 +31,7 @@ logging.basicConfig(
     )
 
 app = Flask(__name__)
+cors = CORS(app,resources={r'/*':{'origins':'*'}})
 app.config["SQLALCHEMY_DATABASE_URI"] = dbloc
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
@@ -37,12 +39,18 @@ db.init_app(app)
 api = Api(app)
 
 api.add_resource(HPI,"/hpi")
-api.add_resource(GDP,"/gdp")
+api.add_resource(GDP, "/gdp")
+#api.add_resource(GDP,"/gdp",methods=['GET'], endpoint='foo')
 
 
-
-
+#CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
+@app.before_request
+def before_request_callback():
+    if request.method == 'GET' or request.remote_addr == '134.122.55.213':
+    	print(request.remote_addr, 'valid request')
+    else:
+        abort(404,'forbidden action')
 
 if __name__ == "__main__":
     #app = create_app(dbloc)
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True)
