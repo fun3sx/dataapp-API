@@ -20,6 +20,7 @@ from dataapi1.database import db
 from dataapi1.resources.hpi_resource import HPI
 from dataapi1.resources.gdp_resource import GDP
 from dataapi1.resources.unpl_resource import UNPL
+from dataapi1.resources.enex_resource import ENEX
 
 from dataapi1.constants import dbloc
 
@@ -43,6 +44,7 @@ api.add_resource(HPI,"/hpi")
 api.add_resource(GDP, "/gdp")
 #api.add_resource(GDP,"/gdp",methods=['GET'], endpoint='foo')
 api.add_resource(UNPL, "/unpl")
+api.add_resource(ENEX, "/enex")
 
 
 #CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
@@ -50,6 +52,7 @@ api.add_resource(UNPL, "/unpl")
 def before_request_callback():
     if request.method == 'GET' or request.remote_addr == '134.122.55.213' or request.remote_addr == '127.0.0.1':
     	print(request.remote_addr, 'valid request')
+        
     else:
         abort(404,'forbidden action')
 
