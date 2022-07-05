@@ -160,3 +160,9 @@ cython_debug/
 #.idea/
 
 constants.py
+__init__.py
+dataapi1.ini
+dataapi1env/
+dataapienv/
+run.py
+wsgi.py
