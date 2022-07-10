@@ -44,8 +44,8 @@ api.add_resource(HPI,"/hpi")
 api.add_resource(GDP, "/gdp")
 #api.add_resource(GDP,"/gdp",methods=['GET'], endpoint='foo')
 api.add_resource(UNPL, "/unpl")
-#api.add_resource(ENEX, "/enex", methods=['PUT'])
-api.add_resource(ENEX, "/enex/<string:date>", methods = ['GET','PUT'])
+api.add_resource(ENEX, "/enex")
+#api.add_resource(ENEX, "/enex/<string:date>", methods = ['GET','PUT'])
 
 
 #CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
