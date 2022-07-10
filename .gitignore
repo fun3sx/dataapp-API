@@ -166,3 +166,5 @@ dataapi1env/
 dataapienv/
 run.py
 wsgi.py
+requirements.txt
+dataapi2env/
