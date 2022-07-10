@@ -44,18 +44,20 @@ api.add_resource(HPI,"/hpi")
 api.add_resource(GDP, "/gdp")
 #api.add_resource(GDP,"/gdp",methods=['GET'], endpoint='foo')
 api.add_resource(UNPL, "/unpl")
-api.add_resource(ENEX, "/enex")
+#api.add_resource(ENEX, "/enex", methods=['PUT'])
+api.add_resource(ENEX, "/enex/<string:date>", methods = ['GET','PUT'])
 
 
 #CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
 @app.before_request
 def before_request_callback():
     if request.method == 'GET' or request.remote_addr == '134.122.55.213' or request.remote_addr == '127.0.0.1':
-    	print(request.remote_addr, 'valid request')
-        
+        print(request.remote_addr, 'valid request')
+        #print(request.environ)
     else:
         abort(404,'forbidden action')
 
 if __name__ == "__main__":
     #app = create_app(dbloc)
     app.run(host='0.0.0.0',debug=True)
+    #app.run()
