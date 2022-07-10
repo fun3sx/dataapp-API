@@ -12,7 +12,7 @@ from dataapi1.database import db
 
 
 enex_args = reqparse.RequestParser()
-enex_args.add_argument("day", type=str, help="Day is required", required=False)
+enex_args.add_argument("day", type=str, help="Day is required", required=True)
 enex_args.add_argument("al_gr", type=str, required=False)
 enex_args.add_argument("bg_gr", type=str, required=False)
 enex_args.add_argument("mk_gr", type=str, required=False)
@@ -61,13 +61,14 @@ resource_fields = {
 class ENEX(Resource):
     
     @marshal_with(resource_fields)
-    def get(self, date):
+    def get(self):
         #epistrefoun ola ta data
         #result = EDAMModel.query.all()
         #print (date)
      
         args = enex_args.parse_args()
-        args['day'] = date
+        #args['day'] = date
+        #print (args)
         result = ENEXModel.query.filter_by(day=args['day']).first()
         if not result:
             abort(404, message="Invalid GET request, result not found")
