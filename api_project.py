@@ -21,6 +21,7 @@ from dataapi1.resources.hpi_resource import HPI
 from dataapi1.resources.gdp_resource import GDP
 from dataapi1.resources.unpl_resource import UNPL
 from dataapi1.resources.enex_resource import ENEX
+from dataapi1.resources.mortgageOrigination_resource import MortgageOrigination
 
 from dataapi1.constants import dbloc
 
@@ -46,7 +47,7 @@ api.add_resource(GDP, "/gdp")
 api.add_resource(UNPL, "/unpl")
 api.add_resource(ENEX, "/enex")
 #api.add_resource(ENEX, "/enex/<string:date>", methods = ['GET','PUT'])
-
+api.add_resource(MortgageOrigination, "/mortgage-origination")
 
 #CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
 @app.before_request
