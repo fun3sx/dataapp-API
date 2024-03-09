@@ -23,7 +23,7 @@ from dataapi1.resources.unpl_resource import UNPL
 from dataapi1.resources.enex_resource import ENEX
 from dataapi1.resources.mortgageOrigination_resource import MortgageOrigination
 
-from dataapi1.constants import dbloc
+from dataapi1.constants import dbloc, ip
 
 
 logging.basicConfig(
@@ -52,7 +52,7 @@ api.add_resource(MortgageOrigination, "/mortgage-origination")
 #CORS(app, resources={ r'/*': { 'origins': '*', 'methods': ['GET', 'PUT', 'PATCH']}})
 @app.before_request
 def before_request_callback():
-    if request.method == 'GET' or request.remote_addr == '134.122.55.213' or request.remote_addr == '127.0.0.1':
+    if request.method == 'GET' or request.remote_addr == ip or request.remote_addr == '127.0.0.1':
         print(request.remote_addr, 'valid request')
         #print(request.environ)
     else:
@@ -60,5 +60,5 @@ def before_request_callback():
 
 if __name__ == "__main__":
     #app = create_app(dbloc)
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0',debug=False)
     #app.run()
